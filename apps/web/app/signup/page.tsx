@@ -12,7 +12,7 @@ import {
   FieldSeparator,
 } from "~/components/ui/field"
 import { trpc } from "~/trpc/client";
-
+import {useSignup} from '../../hooks/api/auth/index'
 type SignupFormValues = {
   name: string
   email: string
@@ -21,7 +21,7 @@ type SignupFormValues = {
 }
 
 export default function SignupPage() {
-    
+    const {createUserWithEmailAndPasswordAsync} = useSignup();
   const { register, handleSubmit } = useForm<SignupFormValues>()
 
   const onSubmit =async (values: SignupFormValues) => {
