@@ -12,7 +12,7 @@ import {
   FieldSeparator,
 } from "~/components/ui/field"
 import { trpc } from "~/trpc/client";
-import {useSignup} from '../../hooks/api/auth/index'
+import {useSignup} from '../../../hooks/api/auth/index'
 type SignupFormValues = {
   name: string
   email: string
