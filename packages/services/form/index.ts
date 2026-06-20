@@ -41,7 +41,11 @@ class FormService {
 			.from(formsTable)
 			.where(eq(formsTable.createdBy, id))
 
-		return forms
+		return forms.map((form) => ({
+			...form,
+			createdAt: form.createdAt ? new Date(form.createdAt).toISOString() : null,
+			updatedAt: form.updatedAt ? new Date(form.updatedAt).toISOString() : null,
+		}))
 	}
 }
 

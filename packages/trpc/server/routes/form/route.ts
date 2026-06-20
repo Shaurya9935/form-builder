@@ -1,6 +1,6 @@
 import { authenticatedProcedure, router } from "../../trpc";
 import { formService } from "../../services";
-import { createFormInputModel, createFormOutputModel,  listFormsOutputModel } from "./model";
+import { createFormInputModel, createFormOutputModel, listFormsOutputModel } from "./model";
 import { generatePath } from "../../utils/path-generator";
 import { z } from "zod";
 
@@ -33,7 +33,7 @@ export const formRouter = router({
 		tags: TAGS,
         protect:true
 	} })
-		.input(z.undefined())
+		.input(z.void())
 		.output(listFormsOutputModel)
 		.query(async ({ ctx }) => {
 			const forms = await formService.listFormsByUserId({ id: ctx.user.id })

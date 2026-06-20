@@ -31,4 +31,26 @@ export const useCreateForm = () => {
   };
 };
 
+export const useListForms = () => {
+  const {
+    data: forms,
+    error,
+    isError,
+    isFetched,
+    isFetching,
+    isLoading,
+    status,
+  } = trpc.form.listForms.useQuery(undefined);
+
+  return {
+    forms: forms ?? [],
+    error,
+    isError,
+    isFetched,
+    isFetching,
+    isLoading,
+    status,
+  };
+};
+
 export default useCreateForm;
