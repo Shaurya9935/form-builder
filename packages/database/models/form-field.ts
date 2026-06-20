@@ -17,7 +17,7 @@ export const formFieldTables = pgTable("form_fields", {
     id: uuid("id").primaryKey().defaultRandom(),
 
     label: varchar('label', {length: 100}).notNull(),       
-    lebelKey: varchar('label_key', {length: 100}).notNull(),
+    labelKey: varchar('label_key', {length: 100}).notNull(),
 
     description: text('description'),
 
