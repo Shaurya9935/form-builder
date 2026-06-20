@@ -13,6 +13,7 @@ import {
 } from "~/components/ui/field"
 import { trpc } from "~/trpc/client";
 import {useSignup} from '../../../hooks/api/auth/index'
+import { useRouter } from "next/navigation";
 type SignupFormValues = {
   name: string
   email: string
@@ -23,11 +24,13 @@ type SignupFormValues = {
 export default function SignupPage() {
     const {createUserWithEmailAndPasswordAsync} = useSignup();
   const { register, handleSubmit } = useForm<SignupFormValues>()
+  const router = useRouter()
 
   const onSubmit =async (values: SignupFormValues) => {
     console.log(values)
     const { id } = await createUserWithEmailAndPasswordAsync({email: values.email, fullName: values.name, password: values.password})
     console.log(`User create with ID: ${id}`)
+    router.replace('/dashboard')
   }
 
   return (
