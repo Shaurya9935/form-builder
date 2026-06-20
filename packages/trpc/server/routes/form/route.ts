@@ -1,7 +1,8 @@
 import { authenticatedProcedure, router } from "../../trpc";
 import { formService } from "../../services";
-import { createFormInputModel, createFormOutputModel } from "./model";
+import { createFormInputModel, createFormOutputModel,  listFormsOutputModel } from "./model";
 import { generatePath } from "../../utils/path-generator";
+import { z } from "zod";
 
 const TAGS = ["Form"];
 const getPath = generatePath("/form");
@@ -25,5 +26,18 @@ export const formRouter = router({
 			})
 
 			return { id }
+		}),
+	listForms: authenticatedProcedure.meta({ openapi: {
+		method: 'POST',
+		path: getPath('/list'),
+		tags: TAGS,
+        protect:true
+	} })
+		.input(z.undefined())
+		.output(listFormsOutputModel)
+		.query(async ({ ctx }) => {
+			const forms = await formService.listFormsByUserId({ id: ctx.user.id })
+
+			return forms
 		}),
 })
